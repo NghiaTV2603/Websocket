@@ -1,0 +1,30 @@
+{
+  "name": "project-base",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --inspect index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NghiaTV2603/NodeJS-base.git"
+  },
+  "keywords": [
+    "nodejs",
+    "base"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NghiaTV2603/NodeJS-base/issues"
+  },
+  "homepage": "https://github.com/NghiaTV2603/NodeJS-base#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
