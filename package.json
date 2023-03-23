@@ -1,30 +1,35 @@
 {
-  "name": "project-base",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "start": "nodemon --inspect index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/NghiaTV2603/NodeJS-base.git"
-  },
-  "keywords": [
-    "nodejs",
-    "base"
-  ],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/NghiaTV2603/NodeJS-base/issues"
-  },
-  "homepage": "https://github.com/NghiaTV2603/NodeJS-base#readme",
-  "dependencies": {
-    "express": "^4.18.2"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.20"
-  }
+   "name": "project-base",
+   "version": "1.0.0",
+   "description": "",
+   "main": "index.js",
+   "scripts": {
+      "start": "nodemon index.js",
+      "test": "echo \"Error: no test specified\" && exit 1"
+   },
+   "repository": {
+      "type": "git",
+      "url": "git+https://github.com/NghiaTV2603/NodeJS-base.git"
+   },
+   "keywords": [
+      "nodejs",
+      "base"
+   ],
+   "author": "",
+   "license": "ISC",
+   "bugs": {
+      "url": "https://github.com/NghiaTV2603/NodeJS-base/issues"
+   },
+   "homepage": "https://github.com/NghiaTV2603/NodeJS-base#readme",
+   "dependencies": {
+      "body-parser": "^1.20.2",
+      "dotenv": "^16.0.3",
+      "express": "^4.18.2",
+      "jsonwebtoken": "^9.0.0",
+      "mongoose": "^7.0.2"
+   },
+   "devDependencies": {
+      "morgan": "^1.10.0",
+      "nodemon": "^2.0.20"
+   }
 }
