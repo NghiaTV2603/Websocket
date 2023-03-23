@@ -13,6 +13,15 @@ const UserController = {
             console.log(['listData log error : '] + e);
         }
     },
+    searchUser : async (req,res,next) => {
+        try{
+            const users = await User.find( { username: { $regex: req.query.username, $options: 'i' }} )
+            res.json({data : users})
+        }catch (e) {
+            console.log(['updateUser log error : '] + e);
+            res.status(500).json('error');
+        }
+    },
     updateUser: async (req, res, next) => {
         try {
             const data = await User.findByIdAndUpdate(
