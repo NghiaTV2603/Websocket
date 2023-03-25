@@ -1,6 +1,6 @@
 const User = require('../models/user.model');
 const jwt = require('jsonwebtoken');
-const JWT_SECRET = process.env.JWT_SECRET
+const JWT_SECRET = process.env.JWT_SECRET;
 console.log(JWT_SECRET);
 const AuthController = {
     login: async (req, res, next) => {
@@ -11,7 +11,7 @@ const AuthController = {
                 password,
             });
             if (data) {
-                const token = jwt.sign({ id: data._id },"JWT_SECRET");
+                const token = jwt.sign({ id: data._id }, 'JWT_SECRET');
                 res.json({
                     data,
                     token,
@@ -47,7 +47,8 @@ const AuthController = {
         try {
             const tokenRequest = req.headers.authorization;
             const token = tokenRequest.split(' ')[1];
-            const tokenVerify = await jwt.verify(token, "JWT_SECRET");
+            const id = await jwt.verify(token, 'JWT_SECRET');
+            req.id = id.id ;
             next();
         } catch (e) {
             console.log(['checkToken log error : '] + e);
