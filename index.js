@@ -6,6 +6,7 @@ const app = express();
 const userRouter = require('./src/routes/user.router');
 const chatRouter = require('./src/routes/chat.router');
 const messageRouter = require('./src/routes/message.router');
+const postRouter = require("./src/routes/post.router")
 const bodyParser = require('body-parser');
 const db = require('./src/confix/db');
 
@@ -19,6 +20,7 @@ app.use(morgan('combined'));
 app.use('/api/v1/', userRouter);
 app.use('/api/v1/chat', chatRouter);
 app.use('/api/v1/message', messageRouter);
+app.use('/api/v1/post', postRouter);
 
 const PORT = process.env.PORT || 5000;
 const server = app.listen(PORT, () => {
