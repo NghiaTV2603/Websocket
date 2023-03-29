@@ -34,20 +34,21 @@ const server = app.listen(PORT, () => {
 const io = require('socket.io')(server, {
     pingTimeout: 60000,
     cors: {
-        origin: 'http://localhost:8000',
+        origin: 'http://localhost:3000',
     },
 });
 
 io.on('connection', (socket) => {
     console.log('connected socket.io');
     socket.on('setup', (dataUser) => {
-        socket.join(dataUser._id);
-        console.log(dataUser._id);
+        socket.join(dataUser);
+        console.log( "setup" +dataUser);
         socket.emit('connected');
     });
 
     socket.on('joinChat', (chatId) => {
-        const id = chatId.id;
+        console.log(chatId)
+        const id = chatId;
         socket.join(id);
         console.log('connected rom chat : ' + id);
     });

@@ -8,7 +8,7 @@ const messageController = {
             const chatId = req.params.chatId ;
             const data = await Message.find({
                 chat : chatId
-            }).populate("sender","-password").populate("chat")
+            }).populate("sender","-password").populate("chat").sort({ createdAt: -1 });
             res.json(data);
         }catch (e) {
             res.status(500);
