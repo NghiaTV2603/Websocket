@@ -34,14 +34,30 @@ const postController = {
     },
     listAllPost: async (req, res, next) => {
         try {
-            const listData = await Post.find()
+            var listData = await Post.find()
                 .sort({ created_at: -1 })
                 .populate('user_id', '-password')
-                .populate('likes','-password');
+                .populate('likes','-password')
+                .populate('comments');
+            listData = await User.populate(listData,{
+                path : 'comments.user_id',
+                select: 'username avatar'
+            });
             res.status(200).send(listData);
         } catch (e) {
             res.status(400).send(e);
         }
+    },
+    listMyPost : async (req,res) => {
+      try{
+          const user_id = req.id;
+          const data = await Post.find({
+              user_id : user_id
+          }).populate("user_id","-password");
+          res.status(200).send(data);
+      }catch (e) {
+          res.status(400).send(e);
+      }
     },
     likePost: async (req, res) => {
         try {

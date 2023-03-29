@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const dotenv = require('dotenv');
+const cors = require('cors')
 
 const app = express();
 const userRouter = require('./src/routes/user.router');
@@ -13,6 +14,7 @@ const db = require('./src/confix/db');
 //connect db
 db.connect();
 dotenv.config();
+app.use(cors());
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
