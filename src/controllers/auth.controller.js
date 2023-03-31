@@ -37,17 +37,18 @@ const AuthController = {
             if (!username || !password) {
                 return res
                     .status(400)
-                    .json({ message: 'Please enter all the fields' });
+                    .json('Please enter all the fields');
             }
             const user = await User.findOne({ username });
             if (user) {
-                return res.status(400).json({ message: 'User already exists' });
+                return res.status(400).json('User already exists');
             }
             const newUser = await User.create({
                 username,
                 password: hashedPassword,
             });
-            res.status(201).json(newUser);
+            const token = jwt.sign({ id: newUser._id }, 'JWT_SECRET');
+            res.status(201).json({data: newUser , token});
         } catch (error) {
             console.error(error);
             res.status(500).json({ message: 'Server error' });

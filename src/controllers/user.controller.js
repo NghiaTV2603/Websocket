@@ -46,6 +46,14 @@ const UserController = {
             res.status(400).json('error update by id');
         }
     },
+    getUser : async (req,res,next) => {
+        try{
+            const {id} = req.params ;
+
+        }catch (e) {
+            
+        }
+    }
 };
 
 module.exports = UserController;
