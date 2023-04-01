@@ -48,7 +48,6 @@ io.on('connection', (socket) => {
     });
 
     socket.on('joinChat', (chatId) => {
-        console.log(chatId)
         const id = chatId;
         socket.join(id);
         console.log('connected rom chat : ' + id);
