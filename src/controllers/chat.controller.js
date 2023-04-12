@@ -91,6 +91,14 @@ const chatController = {
             res.status(500).json({ message: 'Server error' });
         }
     },
+    seenMessage : async (chatId) => {
+        try{
+            var chat = await Chat.findByIdAndUpdate({_id : chatId },{seen : true })
+        }catch (e) {
+            console.error(e);
+            res.status(500).json({ message: 'Server error' });
+        }
+    }
 };
 
 module.exports = chatController;

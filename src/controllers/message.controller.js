@@ -34,7 +34,7 @@ const messageController = {
                 path: "chat.users",
                 select: "name pic email",
             });
-            await Chat.findByIdAndUpdate(req.body.chatId, { latestMessage: message });
+            await Chat.findByIdAndUpdate(req.body.chatId, { latestMessage: message, seen : false });
             res.json(message);
         }catch (e) {
             res.status(400);

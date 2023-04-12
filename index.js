@@ -9,6 +9,7 @@ const chatRouter = require('./src/routes/chat.router');
 const messageRouter = require('./src/routes/message.router');
 const postRouter = require("./src/routes/post.router")
 const bodyParser = require('body-parser');
+const chatController = require('./src/controllers/chat.controller')
 const db = require('./src/confix/db');
 
 //connect db
@@ -70,4 +71,8 @@ io.on('connection', (socket) => {
             socket.in(user._id).emit('message received',newMessage);
         });
     });
+    socket.on('seen' , (data) => {
+        const {chatId} = data ;
+        chatController.seenMessage(chatId);
+    })
 });
