@@ -1,7 +1,7 @@
 const User = require('../models/user.model');
 const jwt = require('jsonwebtoken');
 const JWT_SECRET = process.env.JWT_SECRET;
-const bcrypt = require('bcrypt');
+// const bcrypt = require('bcrypt');
 const saltRounds = 10; // số lần mã hóa
 console.log(JWT_SECRET);
 const AuthController = {
@@ -13,7 +13,8 @@ const AuthController = {
             });
             console.log(data);
             if (data) {
-                const isMatch = await bcrypt.compare(password, data.password);
+                // const isMatch = await bcrypt.compare(password, data.password);
+                const isMatch = true;
                 if (!isMatch) {
                     return res.status(400).json('Invalid username or password');
                 }
@@ -33,7 +34,9 @@ const AuthController = {
     register: async (req, res, next) => {
         try {
             const { username, password } = req.body;
-            const hashedPassword = await bcrypt.hash(password, saltRounds);
+            console.log(req.body);
+            // const hashedPassword = await bcrypt.hash(password, saltRounds);
+            const hashedPassword = 'nghia';
             if (!username || !password) {
                 return res
                     .status(400)
