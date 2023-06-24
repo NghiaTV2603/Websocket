@@ -17,6 +17,11 @@ services:
       - redis
     networks:
       - socket-networks
+    volumes:
+      - .:/app
 networks:
   socket-networks:
     driver: bridge
+volumes:
+  app:
+    driver: local

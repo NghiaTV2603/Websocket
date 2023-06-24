@@ -8,6 +8,7 @@ const AuthController = {
     login: async (req, res, next) => {
         try {
             const { username, password } = req.body;
+            console.log(req.body)
             const data = await User.findOne({
                 username,
             });
