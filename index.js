@@ -2,6 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const dotenv = require('dotenv');
 const cors = require('cors')
+const {redisLoader} = require('./src/redis.loader');
 
 const app = express();
 const userRouter = require('./src/routes/user.router');
@@ -39,6 +40,8 @@ const io = require('socket.io')(server, {
         origin: "*",
     },
 });
+
+redisLoader();
 
 io.on('connection', (socket) => {
     console.log('connected socket.io');
