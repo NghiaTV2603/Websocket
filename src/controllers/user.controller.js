@@ -2,16 +2,13 @@ const User = require('../models/user.model');
 const {redisClient} = require('../redis.loader');
 
 const UserController = {
-    listData: async (req, res, next) => {
+    listData: async (req, res) => {
         try {
             const data = await User.find();
-            if (data) {
-                res.json(data);
-            } else {
-                res.status(500).message('error');
-            }
+            if(!data) return res.status(500).message('error');
+            res.json(data);
         } catch (e) {
-            console.log(['listData log error : '] + e);
+            return console.log(['listData log error : '] + e);
         }
     },
     searchUser : async (req,res,next) => {
@@ -21,8 +18,7 @@ const UserController = {
             if(!userCache){
                 await redisClient.set(`username/${req.query.username}`,JSON.stringify(dataRes));
             }
-            // const users = await User.find( { username: { $regex: req.query.username, $options: 'i' }} )
-            res.json({data : dataRes})
+            return res.json({data : dataRes})
         }catch (e) {
             console.log(['updateUser log error : '] + e);
             res.status(500).json('error');

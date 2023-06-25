@@ -6,16 +6,18 @@ const postController = {
     upPost: async (req, res, next) => {
         try {
             const { image, description } = req.body;
-            const newPost = await Post.create({
-                user_id: req.id,
-                image: image,
-                description: description,
-                likes: [],
-            });
-            await User.updateOne(
-                { _id: req.id },
-                { $push: { posts: newPost._id } }
-            );
+            const [newPost,newUserUpdate] = await Promise.all([
+                Post.create({
+                    user_id: req.id,
+                    image: image,
+                    description: description,
+                    likes: [],
+                }),
+                User.updateOne(
+                    { _id: req.id },
+                    { $push: { posts: newPost._id } }
+                )
+            ])
             res.status(201).send(newPost);
         } catch (e) {
             res.status(400).json(e);
@@ -23,8 +25,7 @@ const postController = {
     },
     deletePost: async (req, res) => {
         try {
-            const id = req.params.id;
-            console.log(id);
+            const {id} = req.params;
             const postDelete = await Post.deleteOne({ _id: id });
             await User.updateOne({ _id: req.id }, { $pull: { posts: id } });
             res.send('success');
@@ -32,7 +33,7 @@ const postController = {
             res.status(500).json(e);
         }
     },
-    listAllPost: async (req, res, next) => {
+    listAllPost: async (req, res) => {
         try {
             var listData = await Post.find()
                 .sort({ created_at: -1 })
